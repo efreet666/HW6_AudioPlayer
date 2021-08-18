@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F54B4A8126CD7E2700EFB761 /* The_Weeknd_Blinding_Lights.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F54B4A7F26CD7E2700EFB761 /* The_Weeknd_Blinding_Lights.mp3 */; };
+		F54B4A8226CD7E2700EFB761 /* Michael_Kiwanuka_Wired_Strings_-_Cold_Little_Heart_47930039.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F54B4A8026CD7E2700EFB761 /* Michael_Kiwanuka_Wired_Strings_-_Cold_Little_Heart_47930039.mp3 */; };
 		F5B674B926C4208C005E4C71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B674B826C4208C005E4C71 /* AppDelegate.swift */; };
 		F5B674BB26C4208C005E4C71 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B674BA26C4208C005E4C71 /* SceneDelegate.swift */; };
 		F5B674BD26C4208C005E4C71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B674BC26C4208C005E4C71 /* ViewController.swift */; };
 		F5B674C026C4208C005E4C71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5B674BE26C4208C005E4C71 /* Main.storyboard */; };
 		F5B674C226C42094005E4C71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5B674C126C42094005E4C71 /* Assets.xcassets */; };
 		F5B674C526C42094005E4C71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5B674C326C42094005E4C71 /* LaunchScreen.storyboard */; };
+		F5B674CE26C429BD005E4C71 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B674CD26C429BD005E4C71 /* FirstViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F54B4A7F26CD7E2700EFB761 /* The_Weeknd_Blinding_Lights.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = The_Weeknd_Blinding_Lights.mp3; path = ../../../../.Trash/The_Weeknd_Blinding_Lights.mp3; sourceTree = "<group>"; };
+		F54B4A8026CD7E2700EFB761 /* Michael_Kiwanuka_Wired_Strings_-_Cold_Little_Heart_47930039.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Michael_Kiwanuka_Wired_Strings_-_Cold_Little_Heart_47930039.mp3"; path = "../../../../.Trash/Michael_Kiwanuka_Wired_Strings_-_Cold_Little_Heart_47930039.mp3"; sourceTree = "<group>"; };
 		F5B674B526C4208C005E4C71 /* HW6_AudioPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HW6_AudioPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5B674B826C4208C005E4C71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5B674BA26C4208C005E4C71 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +29,7 @@
 		F5B674C126C42094005E4C71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F5B674C426C42094005E4C71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F5B674C626C42094005E4C71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F5B674CD26C429BD005E4C71 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,10 +65,13 @@
 				F5B674B826C4208C005E4C71 /* AppDelegate.swift */,
 				F5B674BA26C4208C005E4C71 /* SceneDelegate.swift */,
 				F5B674BC26C4208C005E4C71 /* ViewController.swift */,
+				F5B674CD26C429BD005E4C71 /* FirstViewController.swift */,
 				F5B674BE26C4208C005E4C71 /* Main.storyboard */,
 				F5B674C126C42094005E4C71 /* Assets.xcassets */,
 				F5B674C326C42094005E4C71 /* LaunchScreen.storyboard */,
 				F5B674C626C42094005E4C71 /* Info.plist */,
+				F54B4A8026CD7E2700EFB761 /* Michael_Kiwanuka_Wired_Strings_-_Cold_Little_Heart_47930039.mp3 */,
+				F54B4A7F26CD7E2700EFB761 /* The_Weeknd_Blinding_Lights.mp3 */,
 			);
 			path = HW6_AudioPlayer;
 			sourceTree = "<group>";
@@ -124,8 +133,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F54B4A8226CD7E2700EFB761 /* Michael_Kiwanuka_Wired_Strings_-_Cold_Little_Heart_47930039.mp3 in Resources */,
 				F5B674C526C42094005E4C71 /* LaunchScreen.storyboard in Resources */,
 				F5B674C226C42094005E4C71 /* Assets.xcassets in Resources */,
+				F54B4A8126CD7E2700EFB761 /* The_Weeknd_Blinding_Lights.mp3 in Resources */,
 				F5B674C026C4208C005E4C71 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,6 +151,7 @@
 				F5B674BD26C4208C005E4C71 /* ViewController.swift in Sources */,
 				F5B674B926C4208C005E4C71 /* AppDelegate.swift in Sources */,
 				F5B674BB26C4208C005E4C71 /* SceneDelegate.swift in Sources */,
+				F5B674CE26C429BD005E4C71 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
