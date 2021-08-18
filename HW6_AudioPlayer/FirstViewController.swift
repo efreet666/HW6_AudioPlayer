@@ -20,10 +20,19 @@ class FirstViewController: UIViewController {
     var player = AVAudioPlayer()
     let durationSlider = UISlider()
     let soundSlider = UISlider()
-    var songName: String = "The_Weeknd_Blinding_Lights"
+    
+    var trackName: String?
+    var trackNames: [String]?
+    var indexCurrentTrack: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard let tracks = trackNames else {return}
+        indexCurrentTrack = tracks.firstIndex(of: trackName!)
+//        configuratePlayer(trackName: trackName!)
+//        updateUIByIndexTrack(indexTrack: indexCurrentTrack!)
+        
         
         //MARK: - songImage
         songImage.layer.shadowRadius = 20
@@ -33,7 +42,7 @@ class FirstViewController: UIViewController {
         songImage.layer.shadowPath = UIBezierPath(rect: songImage.bounds).cgPath
         songImage.layer.masksToBounds = false
         songImage.layer.shadowOffset = CGSize(width: 0, height: 10)
-        
+        songImage.layer.cornerRadius = 10
         
         //MARK: - VolumeSlider
         
@@ -72,6 +81,7 @@ class FirstViewController: UIViewController {
         //MARK: - timer from extention
         createTimer()
     }
+    
     
     
     @objc func changeSlider(sender: UISlider) {
@@ -125,7 +135,7 @@ class FirstViewController: UIViewController {
     }
     
     @IBAction func shareButton(_ sender: Any) {
-        self.activitiViewContorller = UIActivityViewController(activityItems: [self.songName ], applicationActivities: nil)
+        self.activitiViewContorller = UIActivityViewController(activityItems: [self.trackName!], applicationActivities: nil)
         self.present(self.activitiViewContorller!, animated: true, completion: nil)
     }
     
@@ -143,7 +153,7 @@ extension FirstViewController {
         }
         currentPlayerValueLabel.text = "\(minutes):\(secodsString)"
     }
-    
+  
     func createTimer() {
         if timer == nil {
             timer = Timer.scheduledTimer(withTimeInterval: 1/5, repeats: true) { [weak self]_ in

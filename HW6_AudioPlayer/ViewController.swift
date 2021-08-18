@@ -6,73 +6,44 @@
 //
 
 import UIKit
-import AVFoundation
 
 class ViewController: UIViewController {
-
-    @objc func buttonAction(sender: UIButton!) {
-        self.performSegue(withIdentifier: "FirstViewController", sender: "John")
-    }
+    let trackNames: [String] = ["Weekend - Bliding light", "Michael Kiwanuka - Cold little heart", "Queen - Another One Bites The Dust", "Noize MC - На Марсе классно"]
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "showVC" {
-                if let vc = segue.destination as? FirstViewController {
-                    guard let text = sender as? String else { return }
-                }
-            }
-        }
-    
-    var artistName: String!
-    var songName: [String : String] = ["Weekend" : "Bliding light", "Michael Kiwanuka" : "Cold little heart"]
-    
-//    var songName: [String] = ["Weekend - Bliding light", "Michael Kiwanuka - Cold little heart"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var i = 1
-        func createCell(){
-            for (name, artist) in songName {
-            let areaButton = UIButton()
-                areaButton.frame = CGRect(x: 0, y: 100 * i , width: Int(self.view.frame.width), height: 100)
-   
-            
-            areaButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-            self.view.addSubview(areaButton)
-
-            let musicLabel = UILabel()
-                musicLabel.frame = CGRect(x: Int(self.view.frame.width) / 2 - 50, y: 50, width: 250, height: 30)
-            musicLabel.font = UIFont(name:"HelveticaNeue", size: 20.0)
-            musicLabel.text = "Music player"
-            self.view.addSubview(musicLabel)
-            
-            let cellView = UIView()
-                cellView.frame = CGRect(x: 20, y: 200, width: Int(self.view.frame.width) - 40, height: 1)
-            cellView.backgroundColor = UIColor.lightGray
-            self.view.addSubview(cellView)
-            
-            let nameLabel = UILabel()
-            nameLabel.frame = CGRect(x: 110, y: 105 * i, width: 250, height: 50)
-                nameLabel.text = "\(name)"
-                nameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
-                self.view.addSubview(nameLabel)
-            
-            let songLabel = UILabel()
-            songLabel.frame = CGRect(x: 110, y: 125 * i, width: 250, height: 50)
-                songLabel.text = "\(artist)"
-            songLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
-                self.view.addSubview(songLabel)
-            
-            let songImage = UIImageView()
-            songImage.frame = CGRect(x: 10, y: 105 * i , width: 90, height: 90) //song count
-            songImage.image = UIImage(named: "\(name)")
-            self.view.addSubview(songImage)
-            i += 1
+        view.addSubview(appNameLabel)
+        addTrackViews()
+        }
+    
+    let appNameLabel: UILabel = {
+         let label = UILabel()
+         label.text = "Playlist"
+         label.font = UIFont.systemFont(ofSize: 30, weight: .medium)
+         label.translatesAutoresizingMaskIntoConstraints = false
+         return label
+     }()
+    
+    func addTrackViews() {
+            for trackNum in 0..<trackNames.count {
+                let trackView = TrackView(frame: CGRect(x: 0, y: trackNum * 100 + 100, width: 390, height: 100))
+                trackView.setup(image: UIImage(named: "\(trackNum + 1)")!, trackName: trackNames[trackNum])
+//                trackView.setUnderLine(color: .lightGray)
+                let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showTrackVC(gestureRecognizer:)))
+                trackView.addGestureRecognizer(gestureRecognizer)
+                view.addSubview(trackView)
             }
         }
-        createCell()
            
-        
-    }
+    @objc func showTrackVC(gestureRecognizer: UITapGestureRecognizer) {
+           let storyboard = UIStoryboard(name: "Main", bundle: nil)
+           guard let trackVC = storyboard.instantiateViewController(identifier: "FirstViewController") as? FirstViewController else { return }
+           guard let trackView = gestureRecognizer.view as? TrackView else { return }
+           trackVC.trackName = trackView.trackNameLabel.text
+           trackVC.trackNames = trackNames
+           show(trackVC, sender: nil)
+       }
 
  
     
