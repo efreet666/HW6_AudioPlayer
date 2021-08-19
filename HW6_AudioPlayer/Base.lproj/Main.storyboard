@@ -69,6 +69,9 @@
                                 <state key="normal">
                                     <imageReference key="backgroundImage" image="backward.fill" catalog="system" renderingMode="original"/>
                                 </state>
+                                <connections>
+                                    <action selector="previousTrack:" destination="t46-hE-yAI" eventType="touchUpInside" id="ZiJ-wE-4GI"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cPh-eR-e21">
                                 <rect key="frame" x="257" y="657" width="37" height="30"/>
@@ -76,6 +79,9 @@
                                 <state key="normal">
                                     <imageReference key="backgroundImage" image="forward.fill" catalog="system" renderingMode="original"/>
                                 </state>
+                                <connections>
+                                    <action selector="nextTrack:" destination="t46-hE-yAI" eventType="touchUpInside" id="Ng8-yU-72O"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bliding lights" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tD-UB-rDu">
                                 <rect key="frame" x="40" y="529" width="334" height="24"/>
@@ -110,10 +116,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9d-qT-3rm">
-                                <rect key="frame" x="349" y="22" width="33" height="25"/>
+                                <rect key="frame" x="352" y="22" width="30" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
-                                    <imageReference key="backgroundImage" image="arrowshape.turn.up.right.fill" catalog="system" renderingMode="original"/>
+                                    <imageReference key="backgroundImage" image="square.and.arrow.up" catalog="system" renderingMode="original"/>
                                 </state>
                                 <connections>
                                     <action selector="shareButton:" destination="t46-hE-yAI" eventType="touchUpInside" id="y2l-YI-Xf5"/>
@@ -140,6 +146,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v87-42-WGc">
+                                <rect key="frame" x="344" y="497.5" width="30" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <imageReference key="backgroundImage" image="list.triangle" catalog="system" renderingMode="original"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="As4-ZH-JmD">
+                                <rect key="frame" x="40" y="497" width="30" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <imageReference key="backgroundImage" image="plus" catalog="system" renderingMode="original"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Ss-R9-Kg3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -150,10 +170,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="artistLabel" destination="sZL-ay-aiF" id="Zn8-NA-5oh"/>
                         <outlet property="currentPlayerValueLabel" destination="UCk-el-Rwe" id="GKn-JB-5WF"/>
                         <outlet property="playPauseButtonOutlet" destination="kWK-ln-2eq" id="Tnq-JF-ZI6"/>
                         <outlet property="playerDurationLabel" destination="qfm-Bw-Sil" id="L3I-Ll-zw1"/>
                         <outlet property="songImage" destination="fP7-jQ-rug" id="yVC-T7-hWK"/>
+                        <outlet property="trackLabel" destination="0tD-UB-rDu" id="eEJ-i0-huc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ic4-VP-oUT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -164,12 +186,14 @@
     <resources>
         <image name="Weekend" width="1000" height="1000"/>
         <image name="airplayaudio" catalog="system" width="128" height="121"/>
-        <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="106"/>
         <image name="backward.fill" catalog="system" width="128" height="79"/>
         <image name="chevron.compact.down" catalog="system" width="128" height="43"/>
         <image name="forward.fill" catalog="system" width="128" height="79"/>
+        <image name="list.triangle" catalog="system" width="128" height="91"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="repeat" catalog="system" width="128" height="99"/>
         <image name="shuffle" catalog="system" width="128" height="93"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

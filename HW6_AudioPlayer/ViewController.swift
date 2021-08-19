@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
-    let trackNames: [String] = ["Weekend - Bliding light", "Michael Kiwanuka - Cold little heart", "Queen - Another One Bites The Dust", "Noize MC - На Марсе классно"]
+    let trackNames: [String] = ["The Weekend - Bliding light", "Michael Kiwanuka - Cold little heart", "Queen - Another One Bites The Dust", "Noize MC - На Марсе классно"]
     
     
     override func viewDidLoad() {
@@ -32,6 +33,29 @@ class ViewController: UIViewController {
 //                trackView.setUnderLine(color: .lightGray)
                 let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showTrackVC(gestureRecognizer:)))
                 trackView.addGestureRecognizer(gestureRecognizer)
+                var player = AVAudioPlayer()
+                func configuratePlayer(trackName: String) {
+                    do {
+                        if let audioPath = Bundle.main.path(forResource: trackName, ofType: "mp3"){
+                        try player = AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioPath))
+                        }
+                    } catch {
+                        print("Error")
+                    }
+                }
+                func configuratePlayerDurationLabel() {
+                        var minutes = Int(player.duration / 60)
+                        let seconds = player.duration - Double(minutes * 60)
+                        var secodsString = seconds < 9.5 ? "0\(String(format: "%.0f", seconds))" : "\(String(format: "%.0f", seconds))"
+                        if secodsString == "60" {
+                            secodsString = "00"
+                            minutes += 1
+                        }
+                    trackView.trackTimeLabel.text = "\(minutes):\(secodsString)"
+                    }
+                configuratePlayer(trackName: trackNames[trackNum])
+               configuratePlayerDurationLabel()
+                
                 view.addSubview(trackView)
             }
         }

@@ -10,6 +10,8 @@ import AVFoundation
 
 class FirstViewController: UIViewController {
     
+    @IBOutlet weak var trackLabel: UILabel!
+    @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var playPauseButtonOutlet: UIButton!
     @IBOutlet weak var currentPlayerValueLabel: UILabel!
     @IBOutlet weak var songImage: UIImageView!
@@ -30,9 +32,11 @@ class FirstViewController: UIViewController {
         
         guard let tracks = trackNames else {return}
         indexCurrentTrack = tracks.firstIndex(of: trackName!)
-//        configuratePlayer(trackName: trackName!)
-//        updateUIByIndexTrack(indexTrack: indexCurrentTrack!)
-        
+        configuratePlayer(trackName: trackName!)
+        updateUIByIndexTrack(indexTrack: indexCurrentTrack!)
+        createTimer()
+        configuratePlayerDurationLabel()
+
         
         //MARK: - songImage
         songImage.layer.shadowRadius = 20
@@ -42,7 +46,7 @@ class FirstViewController: UIViewController {
         songImage.layer.shadowPath = UIBezierPath(rect: songImage.bounds).cgPath
         songImage.layer.masksToBounds = false
         songImage.layer.shadowOffset = CGSize(width: 0, height: 10)
-        songImage.layer.cornerRadius = 10
+        songImage.layer.cornerRadius = 20
         
         //MARK: - VolumeSlider
         
@@ -66,23 +70,43 @@ class FirstViewController: UIViewController {
         self.durationSlider.addTarget(self, action: #selector(changeSlider), for: .valueChanged )
         self.soundSlider.addTarget(self, action: #selector(volumeSlider), for: .valueChanged)
         
-        //MARK: - create audioPath
-        do {
-            if let audioPath = Bundle.main.path(forResource: "The_Weeknd_Blinding_Lights", ofType: "mp3"){
-            try player = AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioPath))
-            self.durationSlider.maximumValue = Float(player.duration)
-            self.soundSlider.maximumValue = Float(player.volume)
-            }
-        } catch {
-            print("Error")
-        }
-        self.player.play()
         
-        //MARK: - timer from extention
-        createTimer()
     }
+    func updateUIByIndexTrack(indexTrack: Int) {
+            guard let tracks = trackNames else { return }
+            trackLabel.text = tracks[indexTrack].split(separator: "-").map(String.init).last
+            artistLabel.text = tracks[indexTrack].split(separator: "-").map(String.init).first
+            songImage.image = UIImage(named: "\(indexTrack + 1)")
+            durationSlider.maximumValue = Float(player.duration)
+            configuratePlayerDurationLabel()
+        }
     
-    
+    func switchingTracks(next: Bool) {
+        guard let tracks = trackNames else { return }
+        guard let indexOfCurrentTrack = indexCurrentTrack else { return }
+        if next {
+            indexCurrentTrack = indexOfCurrentTrack == tracks.count - 1 ? 0 : indexOfCurrentTrack + 1
+        } else {
+            indexCurrentTrack = indexOfCurrentTrack == 0 ? tracks.count - 1 : indexOfCurrentTrack - 1
+            print(indexOfCurrentTrack)
+        }
+        configuratePlayer(trackName: tracks[indexCurrentTrack!])
+        updateUIByIndexTrack(indexTrack: indexCurrentTrack!)
+    }
+
+    //MARK: - create audioPath
+func configuratePlayer(trackName: String) {
+    do {
+        if let audioPath = Bundle.main.path(forResource: trackName, ofType: "mp3"){
+        try player = AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioPath))
+        self.durationSlider.maximumValue = Float(player.duration)
+        self.soundSlider.maximumValue = Float(player.volume)
+        }
+    } catch {
+        print("Error")
+    }
+    self.player.play()
+}
     
     @objc func changeSlider(sender: UISlider) {
         player.stop()
@@ -130,12 +154,24 @@ class FirstViewController: UIViewController {
             }
     }
         
+    @IBAction func previousTrack(_ sender: Any) {
+        switchingTracks(next: true)
+    }
+    
+    @IBAction func nextTrack(_ sender: Any) {
+        if player.currentTime > 5 {
+        player.currentTime = 0
+        } else {
+            switchingTracks(next: false)
+        }
+    }
     @IBAction func backButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func shareButton(_ sender: Any) {
-        self.activitiViewContorller = UIActivityViewController(activityItems: [self.trackName!], applicationActivities: nil)
+        let items: [Any] = ["\(artistLabel.text!)-\(trackLabel.text!)"]
+        self.activitiViewContorller = UIActivityViewController(activityItems: items, applicationActivities: nil)
         self.present(self.activitiViewContorller!, animated: true, completion: nil)
     }
     
