@@ -39,39 +39,43 @@ class FirstViewController: UIViewController {
 
         
         //MARK: - songImage
-        songImage.layer.shadowRadius = 20
+        
+        songImage.layer.shadowRadius = 30
         songImage.layer.shadowOffset = .zero
         songImage.layer.shadowOpacity = 0.5
         songImage.layer.shadowColor = UIColor.black.cgColor
         songImage.layer.shadowPath = UIBezierPath(rect: songImage.bounds).cgPath
         songImage.layer.masksToBounds = false
         songImage.layer.shadowOffset = CGSize(width: 0, height: 10)
-        songImage.layer.cornerRadius = 20
+        songImage.layer.cornerRadius = 50
+        
         
         //MARK: - VolumeSlider
         
         soundSlider.frame = CGRect(x: 40, y: self.view.frame.height - 200, width: self.view.frame.width - 80, height: 20)
         soundSlider.minimumTrackTintColor = #colorLiteral(red: 0.4988975525, green: 0.4993980527, blue: 0.5142464638, alpha: 1)
-        self.view.addSubview(soundSlider)
         soundSlider.minimumValue = 0.0
-        soundSlider.maximumValue = 100.0
-        soundSlider.value = 70.0
+        soundSlider.maximumValue = 50.0
+        soundSlider.value = 40.0
+        self.view.addSubview(soundSlider)
         
         //MARK: - DurationSlider
+        
         durationSlider.frame = CGRect(x: 40, y: self.view.frame.height - 330, width: self.view.frame.width - 80, height: 20)
         durationSlider.minimumTrackTintColor = #colorLiteral(red: 0.9949335456, green: 0.2728733718, blue: 0.4223648906, alpha: 1)
         self.view.addSubview(durationSlider)
         durationSlider.minimumValue = 0.0
-        durationSlider.maximumValue = 100.0
+        durationSlider.maximumValue = 200.0
         
         self.playPauseButtonOutlet.setImage(UIImage(named: "pause"), for: .normal)
         
         //MARK: - Slider addTarget
+        
         self.durationSlider.addTarget(self, action: #selector(changeSlider), for: .valueChanged )
         self.soundSlider.addTarget(self, action: #selector(volumeSlider), for: .valueChanged)
-        
-        
     }
+    
+    
     func updateUIByIndexTrack(indexTrack: Int) {
             guard let tracks = trackNames else { return }
             trackLabel.text = tracks[indexTrack].split(separator: "-").map(String.init).last
@@ -108,6 +112,7 @@ func configuratePlayer(trackName: String) {
     self.player.play()
 }
     
+    
     @objc func changeSlider(sender: UISlider) {
         player.stop()
         player.currentTime = TimeInterval(durationSlider.value)
@@ -134,14 +139,21 @@ func configuratePlayer(trackName: String) {
             self.player.volume = self.soundSlider.value
         }
     }
-    var isPlaying = true
+    
     
     //MARK: - Buttons
+    
+    var isPlaying = true
+    
     @IBAction func playPauseButton(_ sender: Any) {
         if isPlaying == true{
             DispatchQueue.main.async {
                 self.playPauseButtonOutlet.setImage(UIImage(named: "play"), for: .normal)
                 self.player.stop()
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                    self.songImage.transform = CGAffineTransform(scaleX: 1.08, y: 1.08)
+                })
+               
             }
             isPlaying = false
             
@@ -149,21 +161,24 @@ func configuratePlayer(trackName: String) {
             DispatchQueue.main.async {
                 self.playPauseButtonOutlet.setImage(UIImage(named: "pause"), for: .normal)
                 self.player.play()
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                    self.songImage.transform = CGAffineTransform(scaleX: 1, y: 1)
+                })
             }
             isPlaying = true
             }
     }
         
     @IBAction func previousTrack(_ sender: Any) {
-        switchingTracks(next: true)
-    }
-    
-    @IBAction func nextTrack(_ sender: Any) {
         if player.currentTime > 5 {
         player.currentTime = 0
         } else {
             switchingTracks(next: false)
         }
+    }
+    
+    @IBAction func nextTrack(_ sender: Any) {
+        switchingTracks(next: true)
     }
     @IBAction func backButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -177,8 +192,10 @@ func configuratePlayer(trackName: String) {
     
 
 }
+
+
 extension FirstViewController {
-    @objc func updateTimer() {
+     func updateTimer() {
         durationSlider.value = Float(player.currentTime)
         var minutes = Int(player.currentTime / 60)
         let seconds = player.currentTime - Double(minutes * 60)

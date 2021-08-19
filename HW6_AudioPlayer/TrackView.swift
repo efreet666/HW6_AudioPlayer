@@ -43,7 +43,7 @@ class TrackView: UIView {
             albumImageView.image = image
             trackNameLabel.text = trackName
             trackNameLabel.frame = CGRect(x: albumImageView.frame.maxX + 5, y: albumImageView.frame.midY - 30, width: 230, height: 60)
-            trackTimeLabel.frame = CGRect(x: 340, y: Int(trackNameLabel.frame.midY - 10), width: 40, height: 20)
+            trackTimeLabel.frame = CGRect(x: 380, y: Int(trackNameLabel.frame.midY - 10), width: 40, height: 20)
             
             addSubview(albumImageView)
             addSubview(trackNameLabel)
